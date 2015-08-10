@@ -58,8 +58,8 @@ function setup(plugin, imports, register) {
 
     function render() {
       return h('div', [
-        h('div.Presence__Title', 'Users'),
-        h('ul.Presence__Users', Object.keys(users).map(function(userId) {
+        h('h5.Presence__Title', ['Users ', h('small', 'currently viewing this document')]),
+        h('ul.Presence__Users.list-unstyled', Object.keys(users).map(function(userId) {
           return renderUser(ctx, users[userId])
         }))
       ])
@@ -72,7 +72,7 @@ function setup(plugin, imports, register) {
 }
 
 function renderUser(ctx, user) {
-  return h('li.Presence__User', [
+  return h('li.Presence__User'+(ctx.user.id === user.id? '.mark':''), [
     h('span.Presence__User__name', user.name)
   ])
 }

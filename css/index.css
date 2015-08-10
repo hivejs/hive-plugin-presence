@@ -3,11 +3,12 @@
   width: 20%;
   min-width: 5cm;
   max-width: 15cm;
+  padding: .2cm;
 }
 
 #editor {
   margin-left: 20%;
   /* This should have a min-margin-left: 5cm
-     see http://buildinternet.com/2009/10/purely-css-faking-minimum-margins/ 
+     see http://buildinternet.com/2009/10/purely-css-faking-minimum-margins/
    */
 }

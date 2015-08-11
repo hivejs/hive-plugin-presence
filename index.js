@@ -35,26 +35,27 @@ function setup(plugin, imports, register) {
 
   broadcast.registerChannel(new Buffer('presence'), function(user, docId, clientStream, broadcastStream) {
     // update local list
-    users[user.id] = user
+    if(!users[docId]) users[docId] = {}
+    users[docId][user.id] = user
 
     var broadcasting = JSONStringify()
     broadcasting.pipe(broadcastStream)
 
     // Send the new list to everyone
-    broadcasting.write(users)
+    broadcasting.write(users[docId])
 
     var thisClient = JSONStringify()
     thisClient.pipe(clientStream)
 
     // Send the new list to this client
     setTimeout(function() {
-      thisClient.write(users)
+      thisClient.write(users[docId])
     }, 3000)
 
     // Notify the others if this client disconnects
     clientStream.on('close', function() {
-      delete users[user.id]
-      broadcasting.write(users)
+      delete users[docId][user.id]
+      broadcasting.write(users[docId])
     })
 
     // Throw away incoming messages

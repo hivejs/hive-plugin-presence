@@ -58,7 +58,7 @@ function setup(plugin, imports, register) {
 
     function render() {
       return h('div', [
-        h('h5.Presence__Title', ['Users ', h('small', 'currently viewing this document')]),
+        h('h5.Presence__Title', [Object.keys(users).length+' Users ', h('small', 'currently viewing this document')]),
         h('ul.Presence__Users.list-unstyled', Object.keys(users).map(function(userId) {
           return renderUser(ctx, users[userId])
         }))

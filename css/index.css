@@ -4,6 +4,7 @@
   min-width: 5cm;
   max-width: 15cm;
   padding: .2cm;
+  background: #fff;
 }
 
 #editor {
@@ -11,4 +12,37 @@
   /* This should have a min-margin-left: 5cm
      see http://buildinternet.com/2009/10/purely-css-faking-minimum-margins/
    */
+}
+
+@media screen and (max-width: 991px) {
+  .Presence {
+    float: none;
+    position: absolute;
+    bottom: 0;
+    left: .5cm;
+    border: 1px solid #777;
+    border-radius: .3cm;
+  }
+  .Presence .Presence__Users,
+  .Presence .Presence__Users,
+  .Presence .Presence__Title small{
+    display: none;
+  }
+
+  .Presence:hover, .Presence:active {
+    height: 10cm;
+    width: 5cm;
+  }
+  .Presence:hover .Presence__Users,
+  .Presence:active .Presence__Users {
+    display: block;
+  }
+  .Presence:hover .Presence__Title small,
+  .Presence:active .Presence__Title small {
+    display: inline;
+  }
+
+  #editor {
+    margin-left: 0;
+  }
 }

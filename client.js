@@ -73,7 +73,7 @@ function setup(plugin, imports, register) {
 
 function renderUser(ctx, user) {
   return h('li.Presence__User'+(ctx.user.id === user.id? '.mark':''), [
-    h('span.Presence__User__name', user.name)
+    h('span.Presence__User__name', [user.name+' ', ctx.user.id === user.id? h('small', h('em', 'this is you')) : ''])
   ])
 }
 

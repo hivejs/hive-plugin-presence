@@ -62,6 +62,11 @@ function setup(plugin, imports, register) {
         tree = newTree
       }).then(function(){})
     })
+    users.on('add', function(user) {
+      setInterval(function() {
+        user.fetch()
+      }, 10000)
+    })
 
     function* render() {
       return h('div.Presence', [

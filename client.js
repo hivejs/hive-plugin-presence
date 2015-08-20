@@ -20,6 +20,7 @@ var jsonParse = require('json-stream')
   , co = require('co')
   , vdom = require('virtual-dom')
   , h = vdom.h
+  , Backbone = require('backbone')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'editor']
@@ -31,36 +32,33 @@ function setup(plugin, imports, register) {
   link.setAttribute('href', 'static/hive-plugin-presence/css/index.css')
   document.head.appendChild(link)
 
-  ui.page('/:id',
-  function loadClient(ctx, next) {
-    var container = document.createElement('div')
-    container.setAttribute('class', 'Presence')
-    document.body.insertBefore(container, document.body.firstChild)
-
+  ui.page('/:id', function(ctx, next) {
     var broadcast = ctx.broadcast.createDuplexStream(new Buffer('presence'))
-      , users = {} // model
+      , users = new (Backbone.Collection.extend({model: ctx.models.user}))()
 
     broadcast.pipe(jsonParse()).pipe(through.obj(function(list, enc, cb) {
-      // Update model
-      users = list
+      // Update models
+      users.set(Object.keys(list).map(function(userId) {return list[userId]}))
+      cb()
+    }))
 
+    var tree = render()
+      , root = vdom.create(tree)
+    document.body.insertBefore(root, document.body.firstChild)
+
+    users.on('add remove change', function() {
       // Update display
       var newTree = render()
         , patches = vdom.diff(tree, newTree)
       vdom.patch(root, patches)
       tree = newTree
-      cb()
-    }))
-
-    var root
-    var tree = render()
-    container.appendChild(root = vdom.create(tree))
+    })
 
     function render() {
-      return h('div', [
-        h('h5.Presence__Title', [Object.keys(users).length+' Users ', h('small', 'currently viewing this document')]),
-        h('ul.Presence__Users.list-unstyled', Object.keys(users).map(function(userId) {
-          return renderUser(ctx, users[userId])
+      return h('div.Presence', [
+        h('h5.Presence__Title', [users.length+' Users ', h('small', 'currently viewing this document')]),
+        h('ul.Presence__Users.list-unstyled', users.map(function(userId) {
+          return renderUser(ctx, users.get(userId))
         }))
       ])
     }
@@ -72,8 +70,9 @@ function setup(plugin, imports, register) {
 }
 
 function renderUser(ctx, user) {
-  return h('li.Presence__User'+(ctx.user.id === user.id? '.mark':''), [
-    h('span.Presence__User__name', [user.name+' ', ctx.user.id === user.id? h('small', h('em', 'this is you')) : ''])
+  return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), [
+    h('span.Presence__User__name', user.get('name'))
+  , ctx.user.get('id') === user.get('id')? h('small', h('em', ' this is you')) : ''
   ])
 }
 

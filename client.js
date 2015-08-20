@@ -20,12 +20,13 @@ var jsonParse = require('json-stream')
   , co = require('co')
   , vdom = require('virtual-dom')
   , h = vdom.h
-  , Backbone = require('backbone')
 
 module.exports = setup
-module.exports.consumes = ['ui', 'editor']
+module.exports.consumes = ['ui', 'editor', 'models', 'hooks']
 function setup(plugin, imports, register) {
   var ui = imports.ui
+    , hooks = imports.hooks
+    , Backbone = imports.models.Backbone
 
   var link = document.createElement('link')
   link.setAttribute('rel', 'stylesheet')
@@ -42,38 +43,46 @@ function setup(plugin, imports, register) {
       cb()
     }))
 
-    var tree = render()
-      , root = vdom.create(tree)
-    document.body.insertBefore(root, document.body.firstChild)
+    var tree, root
+    co(function*() {
+      tree = yield render()
+      root = vdom.create(tree)
+      document.body.insertBefore(root, document.body.firstChild)
+    }).then(function(){})
 
     users.on('add remove change', function() {
-      // Update display
-      var newTree = render()
-        , patches = vdom.diff(tree, newTree)
-      vdom.patch(root, patches)
-      tree = newTree
+      co(function*() {
+        // Update display
+        var newTree = yield render()
+          , patches = vdom.diff(tree, newTree)
+        vdom.patch(root, patches)
+        tree = newTree
+      }).then(function(){})
     })
 
-    function render() {
+    function* render() {
       return h('div.Presence', [
         h('h5.Presence__Title', [users.length+' Users ', h('small', 'currently viewing this document')]),
-        h('ul.Presence__Users.list-unstyled', users.map(function(userId) {
-          return renderUser(ctx, users.get(userId))
+        h('ul.Presence__Users.list-unstyled', yield users.map(function*(userId) {
+          return yield renderUser(users.get(userId))
         }))
       ])
+    }
+
+    function* renderUser(user) {
+      var children = [
+          h('span.Presence__User__name', user.get('name'))
+        , ctx.user.get('id') === user.get('id')? h('small', h('em', ' this is you')) : ''
+        ]
+      , props = {}
+      yield hooks.callHook('plugin-presence:renderUser', user, props, children)
+      return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), children)
     }
 
     next()
   })
 
   register()
-}
-
-function renderUser(ctx, user) {
-  return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), [
-    h('span.Presence__User__name', user.get('name'))
-  , ctx.user.get('id') === user.get('id')? h('small', h('em', ' this is you')) : ''
-  ])
 }
 
 

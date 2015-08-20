@@ -84,7 +84,7 @@ function setup(plugin, imports, register) {
         ]
       , props = {}
       yield hooks.callHook('plugin-presence:renderUser', user, props, children)
-      return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), children)
+      return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), props, children)
     }
 
     next()

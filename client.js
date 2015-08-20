@@ -39,7 +39,10 @@ function setup(plugin, imports, register) {
 
     broadcast.pipe(jsonParse()).pipe(through.obj(function(list, enc, cb) {
       // Update models
-      users.set(Object.keys(list).map(function(userId) {return list[userId]}))
+      users.set(Object.keys(list).map(function(userId) {
+        if(userId == ctx.user.get('id')) return ctx.user
+        return list[userId]
+      }))
       cb()
     }))
 

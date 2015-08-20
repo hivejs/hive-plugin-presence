@@ -7,6 +7,10 @@
   background: #fff;
 }
 
+.Presence__User {
+  padding: .1cm;
+}
+
 #editor {
   margin-left: 20%;
   /* This should have a min-margin-left: 5cm

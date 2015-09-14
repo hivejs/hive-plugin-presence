@@ -48,9 +48,7 @@ function setup(plugin, imports, register) {
     thisClient.pipe(clientStream)
 
     // Send the new list to this client
-    setTimeout(function() {
-      thisClient.write(users[docId])
-    }, 3000)
+    thisClient.write(users[docId])
 
     // Notify the others if this client disconnects
     clientStream.on('close', function() {

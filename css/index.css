@@ -27,6 +27,7 @@
     border: 1px solid #777;
     border-radius: .3cm;
     padding:0;
+    z-index: 10; /*for good measure, codemirror uses z-index up to 2*/
   }
   .Presence__Title {
     padding-left: .2cm;

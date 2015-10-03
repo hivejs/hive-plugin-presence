@@ -5,6 +5,7 @@
   max-width: 15cm;
   padding: .2cm;
   background: #fff;
+  overflow-y: auto;
 }
 
 .Presence__User {

@@ -20,7 +20,7 @@ var path = require('path')
   , through = require('through2')
 
 module.exports = setup
-module.exports.consumes = ['assets', 'broadcast', 'auth']
+module.exports.consumes = ['assets', 'broadcast', 'auth', 'ui']
 
 function setup(plugin, imports, register) {
   var assets = imports.assets

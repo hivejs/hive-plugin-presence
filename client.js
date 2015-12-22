@@ -28,11 +28,6 @@ function setup(plugin, imports, register) {
     , hooks = imports.hooks
     , Backbone = imports.models.Backbone
 
-  var link = document.createElement('link')
-  link.setAttribute('rel', 'stylesheet')
-  link.setAttribute('href', ui.baseURL+'/static/hive-plugin-presence/css/index.css')
-  document.head.appendChild(link)
-
   ui.page('/documents/:id', function(ctx, next) {
     var broadcast = ctx.broadcast.createDuplexStream(new Buffer('presence'))
       , users = new (Backbone.Collection.extend({model: ctx.models.user}))()

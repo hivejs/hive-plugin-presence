@@ -17,70 +17,57 @@
  */
 var jsonParse = require('json-stream')
   , through = require('through2')
-  , co = require('co')
   , vdom = require('virtual-dom')
   , h = vdom.h
+  , ObservVarhash = require('observ-varhash')
+  , ObservStruct = require('observ-struct')
+  , ObservEmitter = require('observ-emitter')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'editor', 'models', 'hooks']
 function setup(plugin, imports, register) {
   var ui = imports.ui
+    , models = imports.models
     , hooks = imports.hooks
-    , Backbone = imports.models.Backbone
+
+  hooks.on('ui:initState', function*() {
+    ui.state.events.put('presence:renderUser', ObservEmitter())
+  })
 
   ui.page('/documents/:id', function(ctx, next) {
-    var broadcast = ctx.broadcast.createDuplexStream(new Buffer('presence'))
-      , users = new (Backbone.Collection.extend({model: ctx.models.user}))()
-
-    broadcast.pipe(jsonParse()).pipe(through.obj(function(list, enc, cb) {
-      // Update models
-      users.set(Object.keys(list).map(function(userId) {
-        if(userId == ctx.user.get('id')) return ctx.user
-        return list[userId]
+    ui.state.events['editor:load'].listen(function(editableDocument) {
+      ui.state.put('presence', ObservStruct({
+        users: ObservVarhash()
       }))
-      cb()
-    }))
+      var state = ui.state.presence
+      state.users.put(ui.state.user.get('id'), ui.state.user)
 
-    var tree, root
-    co(function*() {
-      tree = yield render()
-      root = vdom.create(tree)
-      document.body.insertBefore(root, document.body.firstChild)
-    }).then(function(){})
+      var broadcast = ctx.broadcast.createDuplexStream(new Buffer('presence'))
+      broadcast.pipe(jsonParse()).pipe(through.obj(function(list, enc, cb) {
+        // Update models
+        Object.keys(list).forEach(function(userId) {
+          if(userId == ui.state.user.get('id')) return
+          if(!state.users[userId]) {
+            var user = new ctx.models.user(list[userId])
+            state.users.put(userId, models.toObserv(user))
+            user.fetch()
+          }
+        })
+        cb()
+      }))
 
-    users.on('add remove change', function() {
-      co(function*() {
-        // Update display
-        var newTree = yield render()
-          , patches = vdom.diff(tree, newTree)
-        vdom.patch(root, patches)
-        tree = newTree
-      }).then(function(){})
-    })
-    users.on('add', function(user) {
+      // fetch users regularly
       setInterval(function() {
-        user.fetch()
+        Object.keys(state.users).forEach(function(userId) {
+          state.users[userId].fetch()
+        })
       }, 10000)
+
+      // inject into page
+      ui.state.events['ui:renderBody'].listen(function(state, children) {
+        children.unshift(render(state))
+      })
     })
-
-    function* render() {
-      return h('div.Presence', [
-        h('h5.Presence__Title', [users.length+' Users ', h('small', 'currently viewing this document')]),
-        h('ul.Presence__Users.list-unstyled', yield users.map(function*(userId) {
-          return yield renderUser(users.get(userId))
-        }))
-      ])
-    }
-
-    function* renderUser(user) {
-      var children = [
-          h('span.Presence__User__name', user.get('name'))
-        , ctx.user.get('id') === user.get('id')? h('small', h('em', ' this is you')) : ''
-        ]
-      , props = {}
-      yield hooks.callHook('plugin-presence:renderUser', user, props, children)
-      return h('li.Presence__User'+(ctx.user.get('id') === user.get('id')? '.mark':''), props, children)
-    }
 
     next()
   })
@@ -88,10 +75,21 @@ function setup(plugin, imports, register) {
   register()
 }
 
+function render(state) {
+  return h('div.Presence', [
+    h('h5.Presence__Title', [Object.keys(state.presence.users).length+' Users ', h('small', 'currently viewing this document')]),
+    h('ul.Presence__Users.list-unstyled', Object.keys(state.presence.users).map(function(userId) {
+      return renderUser(state, state.presence.users[userId])
+    }))
+  ])
+}
 
-function jsonStringify() {
-  return through.obj(function(buf, enc, cb) {
-    this.push(JSON.stringify(buf)+'\n')
-    cb()
-  })
+function renderUser(state, user) {
+  var children = [
+      h('span.Presence__User__name', user.name)
+    , state.user.id === user.id? h('small', h('em', ' this is you')) : ''
+    ]
+  , props = {}
+  state.events['presence:renderUser'](state, user, props, children)
+  return h('li.Presence__User'+(state.user.id === user.id? '.mark':''), props, children)
 }

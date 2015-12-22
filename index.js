@@ -18,7 +18,6 @@
 var path = require('path')
   , co = require('co')
   , through = require('through2')
-  , JSONParse = require('json-stream')
 
 module.exports = setup
 module.exports.consumes = ['assets', 'broadcast', 'auth']

@@ -25,6 +25,7 @@ var jsonParse = require('json-stream')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'editor', 'models', 'hooks']
+module.exports.provides = ['presence'] // used by cursor broadcast plugin
 function setup(plugin, imports, register) {
   var ui = imports.ui
     , models = imports.models
@@ -72,7 +73,7 @@ function setup(plugin, imports, register) {
     next()
   })
 
-  register()
+  register(null, {presence: {}})
 }
 
 function render(state) {

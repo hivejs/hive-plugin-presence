@@ -12,13 +12,6 @@
   padding: .1cm;
 }
 
-.Presence ~ #editor {
-  margin-left: 20%;
-  /* This should have a min-margin-left: 5cm
-     see http://buildinternet.com/2009/10/purely-css-faking-minimum-margins/
-   */
-}
-
 @media screen and (max-width: 991px) {
   .Presence {
     float: none;
@@ -53,9 +46,5 @@
   .Presence:hover .Presence__Title small,
   .Presence:active .Presence__Title small {
     display: inline;
-  }
-
-  .Presence ~ #editor {
-    margin-left: 0;
   }
 }

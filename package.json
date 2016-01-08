@@ -7,9 +7,7 @@
     "through2": "2.x",
     "json-stream": "1.x",
     "virtual-dom": "2.x",
-    "observ-varhash": "1.x",
-    "observ-emitter": "1.x",
-    "observ-struct": "6.x"
+    "atomic-emitter": "3.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

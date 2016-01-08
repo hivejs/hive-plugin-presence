@@ -19,78 +19,103 @@ var jsonParse = require('json-stream')
   , through = require('through2')
   , vdom = require('virtual-dom')
   , h = vdom.h
-  , ObservVarhash = require('observ-varhash')
-  , ObservStruct = require('observ-struct')
-  , ObservEmitter = require('observ-emitter')
+  , AtomicEmitter = require('atomic-emitter')
 
 module.exports = setup
-module.exports.consumes = ['ui', 'editor', 'models', 'hooks']
+module.exports.consumes = ['ui', 'editor', 'api']
 module.exports.provides = ['presence'] // used by cursor broadcast plugin
 function setup(plugin, imports, register) {
   var ui = imports.ui
-    , models = imports.models
-    , hooks = imports.hooks
+    , editor = imports.editor
+    , api = imports.api
 
-  hooks.on('ui:initState', function*() {
-    ui.state.events.put('presence:renderUser', ObservEmitter())
-  })
+  ui.reduxReducerMap.presence = reducer
+  function reducer(state, action) {
+    if(!state) {
+      return {
+        active: false
+      , users: {}
+      }
+    }
+    if('PRESENCE_ACTIVATE' === action.type) {
+      return {...state, active: true}
+    }
+    if('PRESENCE_LOAD_USER' === action.type) {
+      return {...state, users: {...state.users, [action.payload.id]: action.payload}}
+    }
+    return state
+  }
 
-  ui.page('/documents/:id', function(ctx, next) {
-    ui.state.events['editor:load'].listen(function(editableDocument) {
-      ui.state.put('presence', ObservStruct({
-        users: ObservVarhash()
-      }))
-      var state = ui.state.presence
-      state.users.put(ui.state.user.get('id'), ui.state.user)
+  var presence = {
+    action_activate: function() {
+      return {type: 'PRESENCE_ACTIVATE'}
+    }
+  , action_loadUser: function*(userId) {
+      var user = yield api.action_user_get(userId)
+      return yield {type: 'PRESENCE_LOAD_USER', payload: user}
+    }
+  , onRenderUser: AtomicEmitter()
+  }
 
-      var broadcast = ctx.broadcast.createDuplexStream(new Buffer('presence'))
-      broadcast.pipe(jsonParse()).pipe(through.obj(function(list, enc, cb) {
-        // Update models
-        Object.keys(list).forEach(function(userId) {
-          if(userId == ui.state.user.get('id')) return
-          if(!state.users[userId]) {
-            var user = new ctx.models.user(list[userId])
-            state.users.put(userId, models.toObserv(user))
-            user.fetch()
-          }
-        })
-        cb()
-      }))
+  editor.onLoad((editableDoc, broadcast) => {
+    ui.store.dispatch(presence.action_activate())
 
-      // fetch users regularly
-      setInterval(function() {
-        Object.keys(state.users).forEach(function(userId) {
-          state.users[userId].fetch()
-        })
-      }, 10000)
+    ui.store.dispatch({type: 'PRESENCE_LOAD_USER'
+    , payload: ui.store.getState().session.user})
 
-      // inject into page
-      ui.state.events['ui:renderBody'].listen(function(state, children) {
-        children.unshift(render(state))
+    presence.stream = broadcast.createDuplexStream(new Buffer('presence'))
+
+    presence.stream
+    .pipe(jsonParse())
+    .pipe(through.obj(function(list, enc, cb) {
+      // Update models
+      Object.keys(list).forEach(function(userId) {
+        if(ui.store.getState().presence.users[userId]) return
+        ui.store.dispatch(presence.action_loadUser(userId))
       })
-    })
+      cb()
+    }))
 
-    next()
+    // fetch users regularly
+    setInterval(function() {
+      Object.keys(ui.store.getState().presence.users)
+      .forEach(function(userId) {
+        ui.store.dispatch(presence.action_loadUser(userId))
+      })
+    }, 10000)
   })
 
-  register(null, {presence: {}})
-}
+  ui.onRenderBody((store, children) => {
+    if(store.getState().presence.active) children.unshift(render(store))
+  })
 
-function render(state) {
-  return h('div.Presence', [
-    h('h5.Presence__Title', [Object.keys(state.presence.users).length+' Users ', h('small', 'currently viewing this document')]),
-    h('ul.Presence__Users.list-unstyled', Object.keys(state.presence.users).map(function(userId) {
-      return renderUser(state, state.presence.users[userId])
-    }))
-  ])
-}
+  function render(store) {
+    var state = store.getState().presence
+    return h('div.Presence', [
+      h('h5.Presence__Title', [
+        Object.keys(state.users).length+' Users '
+        , h('small', 'currently viewing this document')
+      ])
+    , h('ul.Presence__Users.list-unstyled'
+      , Object.keys(state.users).map(function(userId) {
+        return renderUser(store, state.users[userId])
+      }))
+    ])
+  }
 
-function renderUser(state, user) {
-  var children = [
-      h('span.Presence__User__name', user.name)
-    , state.user.id === user.id? h('small', h('em', ' this is you')) : ''
-    ]
-  , props = {}
-  state.events['presence:renderUser'](state, user, props, children)
-  return h('li.Presence__User'+(state.user.id === user.id? '.mark':''), props, children)
+  function renderUser(store, user) {
+    var state = store.getState()
+    var children = [
+        h('span.Presence__User__name', user.name)
+      , state.session.user.id === user.id? h('small', h('em', ' this is you')) : ''
+      ]
+    , props = {}
+    presence.onRenderUser.emit(store, user, props, children)
+    return h('li.Presence__User'+(state.session.user.id === user.id? '.mark':'')
+    , props
+    , children
+    )
+  }
+
+  register(null, {presence})
 }

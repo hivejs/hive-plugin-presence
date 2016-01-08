@@ -18,9 +18,8 @@
     position: absolute;
     bottom: 0;
     left: .5cm;
-    border: 1px solid #777;
-    border-radius: .3cm;
     padding:0;
+    box-shadow: 0 0 5px #777;
     z-index: 10; /*for good measure, codemirror uses z-index up to 2*/
   }
   .Presence__Title {

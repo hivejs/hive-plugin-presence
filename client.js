@@ -57,7 +57,7 @@ function setup(plugin, imports, register) {
   , onRenderUser: AtomicEmitter()
   }
 
-  editor.onLoad((editableDoc, broadcast) => {
+  editor.onLoad((editableDoc, broadcast, onClose) => {
     ui.store.dispatch(presence.action_activate())
 
     ui.store.dispatch({type: 'PRESENCE_LOAD_USER'
@@ -77,12 +77,17 @@ function setup(plugin, imports, register) {
     }))
 
     // fetch users regularly
-    setInterval(function() {
+    var interval = setInterval(function() {
       Object.keys(ui.store.getState().presence.users)
       .forEach(function(userId) {
         ui.store.dispatch(presence.action_loadUser(userId))
       })
     }, 10000)
+
+    onClose(_=> {
+      clearInterval(interval)
+      presence.stream = null
+    })
   })
 
   ui.onRenderBody((store, children) => {

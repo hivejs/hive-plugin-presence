@@ -1,0 +1,9 @@
+{
+  "en": {
+    "plugin-presence": {
+      "users": "{count} Users"
+    , "users-subheading": "currently viewing this document"
+    , "you": "this is you!"
+    }
+  }
+}

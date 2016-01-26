@@ -98,8 +98,8 @@ function setup(plugin, imports, register) {
     var state = store.getState().presence
     return h('div.Presence', [
       h('h5.Presence__Title', [
-        Object.keys(state.users).length+' Users '
-        , h('small', 'currently viewing this document')
+        ui._('plugin-presence/users')({count: Object.keys(state.users).length})+' '
+      , h('small', ui._('plugin-presence/users-subheading')())
       ])
     , h('ul.Presence__Users.list-unstyled'
       , Object.keys(state.users).map(function(userId) {
@@ -112,7 +112,7 @@ function setup(plugin, imports, register) {
     var state = store.getState()
     var children = [
         h('span.Presence__User__name', user.name)
-      , state.session.user.id === user.id? h('small', h('em', ' this is you')) : ''
+      , state.session.user.id === user.id? h('small', h('em', ' '+ui._('plugin-presence/you')())) : ''
       ]
     , props = {}
     presence.onRenderUser.emit(store, user, props, children)

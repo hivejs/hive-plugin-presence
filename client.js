@@ -40,6 +40,9 @@ function setup(plugin, imports, register) {
     if('PRESENCE_ACTIVATE' === action.type) {
       return {...state, active: true}
     }
+    if('PRESENCE_DEACTIVATE' === action.type) {
+      return {...state, active: false, users: {}}
+    }
     if('PRESENCE_LOAD_USER' === action.type) {
       return {...state, users: {...state.users, [action.payload.id]: action.payload}}
     }
@@ -49,6 +52,9 @@ function setup(plugin, imports, register) {
   var presence = {
     action_activate: function() {
       return {type: 'PRESENCE_ACTIVATE'}
+    }
+  , action_deactivate: function() {
+      return {type: 'PRESENCE_DEACTIVATE'}
     }
   , action_loadUser: function*(userId) {
       var user = yield api.action_user_get(userId)
@@ -87,6 +93,7 @@ function setup(plugin, imports, register) {
     onClose(_=> {
       clearInterval(interval)
       presence.stream = null
+      ui.store.dispatch(presence.action_deactivate())
     })
   })
 

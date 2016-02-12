@@ -1,11 +1,16 @@
 .Presence {
-  float: left;
   width: 20%;
   min-width: 5cm;
   max-width: 15cm;
   padding: .2cm;
   background: #fff;
   overflow-y: auto;
+}
+html[dir="ltr"] .Presence {
+  float: left;
+}
+html[dir="rtl"] .Presence {
+  float: right;
 }
 
 .Presence__User {
@@ -17,13 +22,19 @@
     float: none;
     position: absolute;
     bottom: 0;
-    left: .5cm;
     padding:0;
     box-shadow: 0 0 5px #777;
     z-index: 10; /*for good measure, codemirror uses z-index up to 2*/
   }
+  html[dir="ltr"] .Presence {
+    left: .5cm;
+  }
+  html[dir="rtl"] .Presence {
+    right: .5cm;
+  }
+
   .Presence__Title {
-    padding-left: .2cm;
+    padding: 0 .2cm;
   }
   .Presence__User {
     padding: 0 .2cm;

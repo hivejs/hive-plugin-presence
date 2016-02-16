@@ -1,7 +1,7 @@
 {
   "plugin-presence": {
-    "users": "{count} Users"
-  , "users-subheading": "currently viewing this document"
+    "users": "{count, plural, one {1 user}   other {{count} Users}}"
+  , "users-subheading": "{count, plural, other {currently viewing this document}}"
   , "you": "this is you!"
   }
 }

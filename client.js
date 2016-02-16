@@ -103,10 +103,11 @@ function setup(plugin, imports, register) {
 
   function render(store) {
     var state = store.getState().presence
+      , count = Object.keys(state.users).length
     return h('div.Presence', [
       h('h5.Presence__Title', [
-        ui._('plugin-presence/users')({count: Object.keys(state.users).length})+' '
-      , h('small', ui._('plugin-presence/users-subheading')())
+        ui._('plugin-presence/users')({count})+' '
+      , h('small', ui._('plugin-presence/users-subheading')({count}))
       ])
     , h('ul.Presence__Users.list-unstyled'
       , Object.keys(state.users).map(function(userId) {

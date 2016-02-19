@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count} usuarios",
+		"users-subheading": "viendo este documento actualmente",
+		"you": "¡este eres tu!"
+	}
+}

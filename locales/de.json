@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {Ein Benutzer}   other {{count} Benutzer}}",
+		"users-subheading": "{count, plural, other {betrachten derzeit dieses Dokument}}",
+		"you": "Das bist du!"
+	}
+}

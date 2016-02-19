@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count} utilisateurs",
+		"users-subheading": "consultation de ce document en cours",
+		"you": "c’est vous !"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nike"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count} käyttäjää",
+		"users-subheading": "katselee tätä asiakirjaa",
+		"you": "sinä!"
+	}
+}

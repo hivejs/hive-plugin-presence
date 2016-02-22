@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226",
+			"Mklehr"
+		]
+	},
+	"plugin-presence": {
+		"users": "{{Identical|User}}",
+		"users-subheading": "sub-heading for the previous message ('# User(s)'), so that together they form a sentence. E.g. '1 User', 'currently viewing this document'.\n\nThus in German this would be\n<pre>\n{count, plural,\n  one {betrachtet derzeit dieses Dokument}\nother {betrachten derzeit dieses Dokument}\n}\n</pre>"
+	}
+}

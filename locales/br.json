@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gwenn-Ael"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 utente}   other {{count} utenti}}",
+		"you": "C'hwi eo !"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"WikiPhoenix"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 användare}   other {{count} användare}}",
+		"users-subheading": "{count, plural, other {läser för närvarande detta dokument}}",
+		"you": "detta är du!"
+	}
+}

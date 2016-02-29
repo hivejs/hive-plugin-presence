@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Wladek92"
 		]
 	},
 	"plugin-presence": {
-		"users": "{count} utilisateurs",
-		"users-subheading": "consultation de ce document en cours",
+		"users": "{count, plural, one {1 utilisateur}   other {{count} utilisateurs}}",
+		"users-subheading": "{count, plural, other {consultent actuellement ce document}}",
 		"you": "c’est vous !"
 	}
 }

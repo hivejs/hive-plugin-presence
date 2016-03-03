@@ -5,8 +5,8 @@
 		]
 	},
 	"plugin-presence": {
-		"users": "{count} জন ব্যবহারকারী",
-		"users-subheading": "বর্তমানে এই নথি দেখছেন",
+		"users": "{count, plural, one {1 user}   other {{count} জন ব্যবহারকারী}}",
+		"users-subheading": "{count, plural, other {বর্তমানে এই নথি দেখছেন}}",
 		"you": "এটি আপনি!"
 	}
 }

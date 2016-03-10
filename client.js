@@ -119,7 +119,7 @@ function setup(plugin, imports, register) {
   function renderUser(store, user) {
     var state = store.getState()
     var children = [
-        h('span.Presence__User__name', user.name)
+        h('span.Presence__User__name', user.attributes.name)
       , state.session.user.id === user.id? h('small', h('em', ' '+ui._('plugin-presence/you')())) : ''
       ]
     , props = {}

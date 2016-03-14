@@ -18,6 +18,7 @@
 var path = require('path')
   , co = require('co')
   , through = require('through2')
+  , JSONParse = require('json-stream')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'broadcast', 'auth', 'ui']
@@ -36,24 +37,25 @@ function setup(plugin, imports, register) {
   broadcast.registerChannel(new Buffer('presence'), function(user, docId, clientStream, broadcastStream) {
     // update local list
     if(!users[docId]) users[docId] = {}
-    users[docId][user.id] = user
+    if(users[docId][user.id]) users[docId][user.id]++
+    else users[docId][user.id] = 1
 
     var broadcasting = JSONStringify()
     broadcasting.pipe(broadcastStream)
 
-    // Send the new list to everyone
-    broadcasting.write(users[docId])
-
     var thisClient = JSONStringify()
     thisClient.pipe(clientStream)
+ 
+    // Send a patch to everyone
+    broadcasting.write({[user.id]: users[docId][user.id]})
 
-    // Send the new list to this client
+    // Send the current list to this client
     thisClient.write(users[docId])
 
     // Notify the others if this client disconnects
     clientStream.on('close', function() {
-      delete users[docId][user.id]
-      broadcasting.write(users[docId])
+      users[docId][user.id]--
+      broadcasting.write({[user.id]: users[docId][user.id]})
     })
 
     // Throw away incoming messages
@@ -62,14 +64,18 @@ function setup(plugin, imports, register) {
     }))
 
     // Athorize presence:read
-    broadcastStream.pipe(through(function(buf, enc, cb) {
+    broadcastStream.pipe(JSONParse()).pipe(through.obj(function(patch, enc, cb) {
       var that = this
       co(function*() {
         var authorized = yield auth.authorize(user, 'document/presence:read', {document: docId})
         if(!authorized) return
-        that.push(buf)
+        for(var userId in patch) {
+          users[docId][userId] = patch[userId]
+          if(!users[docId][userId]) delete users[docId][userId]
+        }
+        that.push(users[docId])
       }).then(cb).catch(cb)
-    })).pipe(clientStream)
+    })).pipe(thisClient)
   })
 
   register()

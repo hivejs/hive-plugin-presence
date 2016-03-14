@@ -46,6 +46,11 @@ function setup(plugin, imports, register) {
     if('PRESENCE_LOAD_USER' === action.type) {
       return {...state, users: {...state.users, [action.payload.id]: action.payload}}
     }
+    if('PRESENCE_REMOVE_USER' === action.type) {
+      var newState = {...state, users: {...state.users}}
+      delete newState.users[action.payload]
+      return newState
+    }
     return state
   }
 
@@ -59,6 +64,9 @@ function setup(plugin, imports, register) {
   , action_loadUser: function*(userId) {
       var user = yield api.action_user_get(userId)
       return yield {type: 'PRESENCE_LOAD_USER', payload: user}
+    }
+  , action_removeUser: function(user) {
+      return {type: 'PRESENCE_REMOVE_USER', payload: user}
     }
   , onRenderUser: AtomicEmitter()
   }
@@ -75,9 +83,15 @@ function setup(plugin, imports, register) {
     .pipe(jsonParse())
     .pipe(through.obj(function(list, enc, cb) {
       // Update models
-      Object.keys(list).forEach(function(userId) {
+      var users = Object.keys(list)
+      users.forEach(function(userId) {
         if(ui.store.getState().presence.users[userId]) return
         ui.store.dispatch(presence.action_loadUser(userId))
+      })
+      // Remove users that left
+      Object.keys(ui.store.getState().presence.users)
+      .forEach((userId) => {
+        if(!~users.indexOf(userId)) ui.store.dispatch(presence.action_removeUser(userId))
       })
       cb()
     }))

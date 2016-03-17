@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Green Zero",
+			"Lxlalexlxl"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 користувач}   інші {{count} користувачі}}",
+		"users-subheading": "{count, plural, other {переглядаєте цей документ}}",
+		"you": "це ви!"
+	}
+}

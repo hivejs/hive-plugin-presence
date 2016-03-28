@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mateon1"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 użytkownik} few {{count} użytkownicy} other {{count} użytkowników}}",
+		"users-subheading": "{count, plural, one {właśnie wyświetlający ten dokument} few {właśnie wyświetlający ten dokument} other {właśnie wyświetlających ten dokument}}",
+		"you": "to ty!"
+	}
+}

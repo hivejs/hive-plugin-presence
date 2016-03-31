@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Luk3"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 usuário}   other {{count} Usuários}}",
+		"users-subheading": "{count, plural, other {vendo este documento atualmente}}",
+		"you": "este é você!"
+	}
+}

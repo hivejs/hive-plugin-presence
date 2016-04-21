@@ -6,6 +6,7 @@
 	},
 	"plugin-presence": {
 		"users": "{count, plural, one {1 utente}   other {{count} utenti}}",
-		"users-subheading": "{count, plural, other {attualmente vedendo questo documento}}"
+		"users-subheading": "{count, plural, other {attualmente vedendo questo documento}}",
+		"you": "questo sei tu!"
 	}
 }

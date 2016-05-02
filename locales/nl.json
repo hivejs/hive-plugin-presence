@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Siebrand"
+			"Siebrand",
+			"Jeleniccz"
 		]
 	},
 	"plugin-presence": {
-		"users": "{count} gebruikers",
+		"users": "{count, plural , one {1 user} other {{count} gebruikers}}",
 		"users-subheading": "dit document wordt op het moment weergegeven",
 		"you": "u bent dit"
 	}

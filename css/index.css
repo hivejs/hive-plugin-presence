@@ -16,11 +16,13 @@
  */
 .Presence {
   width: 20%;
+  height: 100%;
   min-width: 5cm;
   max-width: 15cm;
   padding: .2cm;
   background: #fff;
   overflow-y: auto;
+  border: 1px #aaa solid;
 }
 html[dir="ltr"] .Presence {
   float: left;
@@ -35,6 +37,7 @@ html[dir="rtl"] .Presence {
 
 @media screen and (max-width: 991px) {
   .Presence {
+    height: auto;
     float: none;
     position: absolute;
     bottom: 0;

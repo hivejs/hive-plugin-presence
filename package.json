@@ -1,6 +1,6 @@
 {
   "name": "hive-plugin-presence",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Chat plugin for hive.js",
   "main": "index.js",
   "dependencies": {

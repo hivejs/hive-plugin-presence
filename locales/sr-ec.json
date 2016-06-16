@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rancher"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 корисник} few {{count} корисника} many {{count} корисника} other {{count} корисника}}",
+		"users-subheading": "{count, plural, one {тренутно гледа овај документ} few {тренутно гледају овај документ} many {тренутно гледа овај документ} other {тренутно гледа овај документ}}",
+		"you": "ово сте ви!"
+	}
+}

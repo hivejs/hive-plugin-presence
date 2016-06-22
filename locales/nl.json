@@ -6,8 +6,8 @@
 		]
 	},
 	"plugin-presence": {
-		"users": "{count, plural , one {1 user} other {{count} gebruikers}}",
-		"users-subheading": "dit document wordt op het moment weergegeven",
+		"users": "{count, plural , one {1 gebruiker} other {{count} gebruikers}}",
+		"users-subheading": "{count, plural,\n  one {kijkt naar dit document}\nother {kijken naar dit document}\n}",
 		"you": "u bent dit"
 	}
 }

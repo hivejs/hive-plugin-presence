@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {Eine Metmaacher}   other {{count} Metmaacher}}",
+		"users-subheading": "{count, plural,\n  one {belohrd em Momang dat Dokkemänt}\nother {belohre em Momang dat Dokkemänt}\n}",
+		"you": "Dat bes Do!"
+	}
+}

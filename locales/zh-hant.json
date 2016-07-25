@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly",
+			"Liuxinyu970226"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 位使用者}  other {{count} 位使用者}}",
+		"users-subheading": "{count, plural, other {正在檢閱此文件}}",
+		"you": "這是您！"
+	}
+}

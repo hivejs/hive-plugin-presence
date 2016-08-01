@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kumkumuk",
+			"Mirzali"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 karber}   other {{count} karberi}}",
+		"users-subheading": "{count, plural, other {mewcuda ena dokuman asenayış}}",
+		"you": "eno tıya!"
+	}
+}

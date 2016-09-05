@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pon44695"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 ผู้ใช้}   ผู้ใช้อื่น {{count} คน}}",
+		"users-subheading": "{count, plural, other {ในขณะนี้กำลังดูเอกสารนี้อยู่}}",
+		"you": "นี่คือคุณ!"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby",
+			"SuperPotato"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 bruker}  other {{count} brukere}}",
+		"users-subheading": "{count, plural, other {ser for tiden dokumentet}}",
+		"you": "dette er deg!"
+	}
+}

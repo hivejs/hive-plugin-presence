@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 usuariu}   other {{count} usuarios}}",
+		"users-subheading": "{count, plural, other {viendo esti documentu anguaño}}",
+		"you": "¡yes tu!"
+	}
+}

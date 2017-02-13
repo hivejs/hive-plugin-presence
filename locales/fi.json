@@ -5,8 +5,8 @@
 		]
 	},
 	"plugin-presence": {
-		"users": "{count} käyttäjää",
-		"users-subheading": "katselee tätä asiakirjaa",
+		"users": "{count, plural, one {1 käyttäjä}   other {{count} käyttäjää}}",
+		"users-subheading": "{count, plural, other {katselee tätä asiakirjaa}}",
 		"you": "sinä!"
 	}
 }

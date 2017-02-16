@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jagwar"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {mpikambana 1}   other {mpikambana {count}}}",
+		"users-subheading": "{count, plural, other {no mijery an'ity tahirinkevitra ity}}",
+		"you": "ianao io!"
+	}
+}

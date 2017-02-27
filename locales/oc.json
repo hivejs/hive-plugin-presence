@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 utilizaire}   other {{count} utilizaires}}",
+		"users-subheading": "{count, plural, other {consultan actualament aqueste document}}",
+		"you": "sètz vos !"
+	}
+}

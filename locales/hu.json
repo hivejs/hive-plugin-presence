@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Urbalazs",
+			"Wolf Rex"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 felhasználó}   other {{count} felhasználó}}",
+		"users-subheading": "{count, plural, other {nézi jelenleg ezt a dokumentumot}}",
+		"you": "ez te vagy!"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Marat-avgust"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count} кеше",
+		"users-subheading": "әлеге вакытта бу документны карыйлар",
+		"you": "бу сез!"
+	}
+}

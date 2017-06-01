@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Srdjan m"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 korisnik}   druga {{count} korisnika}}",
+		"users-subheading": "{count, plural, other {trenutno gledaju ovaj dokument}}",
+		"you": "ovo ste Vi!"
+	}
+}

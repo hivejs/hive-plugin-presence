@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Belkacem77"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 n useqdac}   other {{count} n iseqdacen}}",
+		"users-subheading": "{count, plural, other {ttwalin akka tura isemli-agi}}",
+		"you": "wagi d kečč!"
+	}
+}

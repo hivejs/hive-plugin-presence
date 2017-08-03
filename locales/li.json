@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ooswesthoesbes"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural , one {1 gebroeker} other {{count} gebroekers}}",
+		"users-subheading": "{count, plural,\n  one {betrach dit document}\nother {betrachte dit document}\n}",
+		"you": "doe bös dit!"
+	}
+}

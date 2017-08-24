@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joedalton"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 bruger}  other {{count} brugere}}",
+		"users-subheading": "{count, plural, other {der lige nu ser dette dokument}}",
+		"you": "dette er dig!"
+	}
+}

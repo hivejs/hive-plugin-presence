@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 удзельнік}   other {{count} удзельнікаў}}",
+		"users-subheading": "{count, plural, other {цяпер праглядаюць гэты дакумэнт}}"
+	}
+}

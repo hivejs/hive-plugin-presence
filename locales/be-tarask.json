@@ -6,6 +6,7 @@
 	},
 	"plugin-presence": {
 		"users": "{count, plural, one {1 удзельнік}   other {{count} удзельнікаў}}",
-		"users-subheading": "{count, plural, other {цяпер праглядаюць гэты дакумэнт}}"
+		"users-subheading": "{count, plural, other {цяпер праглядаюць гэты дакумэнт}}",
+		"you": "гэта вы!"
 	}
 }

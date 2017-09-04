@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mikel Ibaiba"
+		]
+	},
+	"plugin-presence": {
+		"users": "{zenbatu, plurala, bat {1 user}   beste {{count} Erabiltzaileak}}",
+		"users-subheading": "{batu, plurala, beste {dokumentu hau orain ikusten}}",
+		"you": "Hau zu zara!"
+	}
+}

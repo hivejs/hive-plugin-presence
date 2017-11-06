@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nikosgranturismogt"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 χρήστης}   other {{count} Χρήστες}}",
+		"users-subheading": "{count, plural, other {τώρα βλέπετε αυτό το έγγραφο}}",
+		"you": "αυτός είσαι εσύ!"
+	}
+}

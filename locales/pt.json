@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Athena in Wonderland"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 utilizador}   other {{count} utilizadores}}",
+		"users-subheading": "{count, plural, other {vendo este documento atualmente}}",
+		"you": "este és tu!"
+	}
+}

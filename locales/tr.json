@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chansey"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 kullanıcı}   diğer {{count} Kullanıcılae}}",
+		"users-subheading": "{count, plural, diğer {şu an bu belgeyi izleyenler}}",
+		"you": "bu sizsiniz!"
+	}
+}

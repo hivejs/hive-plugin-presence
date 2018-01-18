@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sfic"
+		]
+	},
+	"plugin-presence": {
+		"you": "यह आप हो !"
+	}
+}

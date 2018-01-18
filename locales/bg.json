@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"StanProg"
+		]
+	},
+	"plugin-presence": {
+		"you": "това сте вие!"
+	}
+}

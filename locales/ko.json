@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"plugin-presence": {
+		"you": "사용자 본인입니다!"
+	}
+}

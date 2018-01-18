@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"HalanTul"
+		]
+	},
+	"plugin-presence": {
+		"users-subheading": "\n{суот, элбэх ахсаан, атын {бу докумуону көрөн билсиҥ}}"
+	}
+}

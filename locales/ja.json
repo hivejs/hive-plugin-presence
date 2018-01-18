@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yusuke1109"
+		]
+	},
+	"plugin-presence": {
+		"you": "これはあなたです！"
+	}
+}

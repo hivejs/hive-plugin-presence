@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nirajan pant"
+		]
+	},
+	"plugin-presence": {
+		"you": "यो तम हौ!"
+	}
+}

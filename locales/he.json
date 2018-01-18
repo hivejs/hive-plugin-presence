@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"YaronSh"
+		]
+	},
+	"plugin-presence": {
+		"you": "מדובר בך!"
+	}
+}

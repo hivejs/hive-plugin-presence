@@ -5,6 +5,8 @@
 		]
 	},
 	"plugin-presence": {
+		"users": "{count, plural, one {משתמש אחד}   other {{count} משתמשים}}",
+		"users-subheading": "{count, plural, other {צפים במסמך כרגע}}",
 		"you": "מדובר בך!"
 	}
 }

@@ -5,6 +5,7 @@
 		]
 	},
 	"plugin-presence": {
+		"users": "{count, plural, one {Ee Benotzer}   other {{count} Benotzer}}",
 		"you": "dat sidd Dir!"
 	}
 }

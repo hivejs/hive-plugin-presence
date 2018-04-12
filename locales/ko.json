@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Revi"
 		]
 	},
 	"plugin-presence": {
+		"users": "{count, plural, other {{count} 사용자}}",
+		"users-subheading": "{count, plural, other {가 이 문서를 열람 중}}",
 		"you": "사용자 본인입니다!"
 	}
 }

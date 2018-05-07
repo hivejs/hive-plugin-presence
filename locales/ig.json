@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ukabia"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 òjìème}  other {{count} Òjìème}}"
+	}
+}

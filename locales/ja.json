@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yusuke1109"
+			"Yusuke1109",
+			"Omotecho"
 		]
 	},
 	"plugin-presence": {
+		"users": "{count, plural, one {1 ユーザー}   他{{count}人のユーザー}}",
+		"users-subheading": "{count, plural, 他が{現在、この文書を閲覧中です}}",
 		"you": "これはあなたです！"
 	}
 }

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"plugin-presence": {
+		"users": "{count, plural, one {1 utende}   other {{count} utinde}}",
+		"users-subheading": "{count, plural, other {osce a die 'ndrucanne stu documende}}",
+		"you": "quiste si tu!"
+	}
+}

@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elisardojm"
+			"Elisardojm",
+			"Navhy"
 		]
 	},
 	"plugin-presence": {
 		"users": "{count, plural, one {1 usuario}   other {{count} usuarios}}",
-		"users-subheading": "{count, plural, other {vendo este documento actualmente}}",
+		"users-subheading": "{count, plural, other {estase a ver este documento agora}}",
 		"you": "este é vostede!"
 	}
 }

@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"Vlad5250"
 		]
 	},
 	"plugin-presence": {
 		"users": "{count, plural, one {1 корисник}   други {{count} корисници}}",
-		"users-subheading": "{count, plural, други {во мигов го гледаат документов}}",
+		"users-subheading": "{count, plural, other {во мигов го гледаат документов}}",
 		"you": "ова сте вие!"
 	}
 }

@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Mirin"
 		]
 	},
 	"plugin-presence": {
-		"users": "{count, plural, one {1 uzanto}   other {{count} uzantoj}}"
+		"users": "{count, plural, one {1 uzanto}   other {{count} uzantoj}}",
+		"users-subheading": "{count, plural, one {nun vidanta jenan dokumenton} other {nun vidantaj jenan dokumenton}}",
+		"you": "tio estas vi!"
 	}
 }
